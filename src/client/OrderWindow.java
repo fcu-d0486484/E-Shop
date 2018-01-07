@@ -15,7 +15,6 @@ public class OrderWindow {
 		Oil.pushstock(tmp, 15);
 		
 		Oil.removeItem(tmp, 50);
-		
 		Oil.removeItem(tmp, 777);
 		
 		Oil.getAllstock();
