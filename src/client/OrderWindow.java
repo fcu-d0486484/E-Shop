@@ -18,5 +18,6 @@ public class OrderWindow {
 		Oil.removeItem(tmp, 777);
 		
 		Oil.getAllstock();
+		System.out.println("歐巴馬英九把刀");
 	}
 }
