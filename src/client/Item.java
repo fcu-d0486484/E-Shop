@@ -21,7 +21,7 @@ abstract class Manager{
 	}
 	
 	void getAllstock() {
-		System.out.println("¥Ø«e®w¦s:");
+		System.out.println("ç›®å‰åº«å­˜:");
 		for(Item it:stock) {
 			it.getitemstock();
 		}
@@ -51,19 +51,19 @@ class OilManager extends Manager{
 				this.stocknum=initnum;
 			}
 			void pushstock(double addnum) {
-				System.out.println("«~¦W:"+this.name+"¼W¥[±q"+this.stocknum+">>>"+(this.stocknum+addnum));
+				System.out.println("å“å:"+this.name+"å¢åŠ å¾"+this.stocknum+">>>"+(this.stocknum+addnum));
 				this.stocknum+=addnum;
 			}
 			void removeitem(double rmnum) {
 				if(rmnum>this.stocknum)
-					System.out.println("«~¦W:"+this.name+"®w¦s¤£¨¬¡A¥Ø«e:"+this.stocknum+"¡A±ı¦©°£:"+rmnum);
+					System.out.println("å“å:"+this.name+"åº«å­˜ä¸è¶³ï¼Œç›®å‰:"+this.stocknum+"ï¼Œæ¬²æ‰£é™¤:"+rmnum);
 				else {
-					System.out.println("«~¦W:"+this.name+"¥H¦©°£"+this.stocknum+">>>"+(this.stocknum-rmnum));
+					System.out.println("å“å:"+this.name+"ä»¥æ‰£é™¤"+this.stocknum+">>>"+(this.stocknum-rmnum));
 					this.stocknum-=rmnum;
 				}
 			}
 			void getitemstock() {
-				System.out.println("«~¦W:"+this.name+"¼Æ¶q:"+this.stocknum);
+				System.out.println("å“å:"+this.name+"æ•¸é‡:"+this.stocknum);
 			}
 		};
 	}
@@ -77,7 +77,7 @@ class OilManager extends Manager{
 			}
 		}
 		if(respond==null) {
-			System.out.println("µLªk§ä¨ì§A»İ­nªºªo«~");
+			System.out.println("ç„¡æ³•æ‰¾åˆ°ä½ éœ€è¦çš„æ²¹å“");
 		}
 		return respond;
 	}
