@@ -4,12 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 abstract class Manager{
-	protected String systemName;
-	
-	Manager(String systemName){
-		this.systemName = systemName;
-	}
-	final public String getName(){ return this.systemName; }
 	
 	protected List<Item> stock = new ArrayList<Item>();
 	
@@ -19,11 +13,12 @@ abstract class Manager{
 		stock.add(it);
 	}
 	
-	void getAllstock() {
-		System.out.println("目前庫存:");
+	List<String> getAllstock() {
+		List<String> tmp = new ArrayList<String>();
 		for(Item it:stock) {
-			it.getitemstock();
+			tmp.add(it.getitemstock());
 		}
+		return tmp;
 	}
 	
 	void pushstock(Item it,double addnum) {

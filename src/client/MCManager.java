@@ -1,10 +1,7 @@
 package client;
 
 public class MCManager extends Manager{
-	MCManager(String systemName){
-		super(systemName);
-	}
-	
+
 	@Override
 	Item findItem(String name) {
 		Item respond=null;
@@ -40,8 +37,8 @@ public class MCManager extends Manager{
 					this.stocknum-=rmnum;
 				}
 			}
-			void getitemstock() {
-				System.out.println("品名:"+this.name+"數量:"+this.stocknum);
+			String getitemstock() {
+				return this.name+":"+this.stocknum;
 			}
 		};
 	}

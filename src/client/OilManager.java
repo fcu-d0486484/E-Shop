@@ -1,9 +1,7 @@
 package client;
 
 class OilManager extends Manager{
-	OilManager(String systemName){
-		super(systemName);
-	}
+
 	@Override
 	Item createItem() {
 		return new Item() {
@@ -23,8 +21,8 @@ class OilManager extends Manager{
 					this.stocknum-=rmnum;
 				}
 			}
-			void getitemstock() {
-				System.out.println("品名:"+this.name+"數量:"+this.stocknum);
+			String getitemstock() {
+				return this.name+":"+this.stocknum;
 			}
 		};
 	}
