@@ -1,23 +1,22 @@
 package client;
 import java.util.*;
-
+import java.util.Scanner;
 public class OrderWindow {
 	List<Item> Cart = new ArrayList<Item>();
 	public static void main(String[] args) {
-		Manager Oil = new OilManager();
-		Oil.initNewItem("NineTwo",80.0);
-		Oil.initNewItem("NineFive",75.0);
-		Oil.initNewItem("NineEight",50.0);
+		/*Manager oil = new OilManager("CPC");
+		oil.initNewItem("NineTwo",80.0);
+		oil.initNewItem("NineFive",75.0);
+		oil.initNewItem("NineEight",50.0);
 		
-		Item tmp=Oil.findItem("NineTwo");
-		Oil.getitstock(tmp);
+		Item tmp=oil.findItem("NineTwo");
+		oil.getitstock(tmp);
 		
-		Oil.pushstock(tmp, 15);
+		oil.pushstock(tmp, 15);
 		
-		Oil.removeItem(tmp, 50);
-		Oil.removeItem(tmp, 777);
+		oil.removeItem(tmp, 50);
+		oil.removeItem(tmp, 777);
 		
-		Oil.getAllstock();
-		System.out.println("Taiwan No1 呵呵");
+		oil.getAllstock();*/
 	}
 }
