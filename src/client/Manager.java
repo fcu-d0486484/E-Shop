@@ -7,9 +7,9 @@ abstract class Manager{
 	
 	protected List<Item> stock = new ArrayList<Item>();
 	
-	void initNewItem(String itemname,double Fstock) {
+	void initNewItem(String itemname,double Fstock,double price) {
 		Item it = createItem();
-		it.initNewitem(itemname,Fstock);
+		it.initNewitem(itemname,Fstock,price);
 		stock.add(it);
 	}
 	

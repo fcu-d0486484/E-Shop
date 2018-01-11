@@ -18,6 +18,7 @@ import java.util.*;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextPane;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JScrollBar;
 import javax.swing.JTextField;
@@ -48,19 +49,19 @@ public class OilWindow extends JFrame {
 	 * Create the frame.
 	 */
 	public OilWindow() {
-		JList itemlist = new JList();
-		DefaultListModel itemmodel=new DefaultListModel();
+		JList<String> itemlist = new JList<String>();
+		DefaultListModel<String> itemmodel=new DefaultListModel<String>();
 		List<String> viewstring=new ArrayList<String>();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 560, 355);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[]{182, 197, 0, 0};
-		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 0, 0};
+		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
 		gbl_contentPane.columnWeights = new double[]{1.0, 1.0, 1.0, Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{1.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPane.rowWeights = new double[]{1.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 		JTextPane itemview = new JTextPane();
 		itemview.setEditable(false);
@@ -84,13 +85,15 @@ public class OilWindow extends JFrame {
 		addbtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int sel = itemlist.getSelectedIndex();
-				String[] item = itemmodel.getElementAt(sel).toString().split(":");
-				
-				int num = Integer.parseInt(textField.getText());
-				viewstring.add(item[0]+":"+num);
+				String[] item = itemmodel.getElementAt(sel).split(":");
+				String add = itemmodel.getElementAt(sel);
+				Double num = Double.parseDouble(textField.getText());
+				add = item[0]+":"+(Double.parseDouble(item[1])-num)+item[2];
+				itemmodel.removeElementAt(sel);
+				itemmodel.insertElementAt(add, sel);
+				itemlist.setModel(itemmodel);
+				viewstring.add(item[0]+":"+num+":"+item[2]);
 				textField.setText("");
-				OwO.ma.findItem(item[0]).removeitem(num);
-				Refreshlist(itemmodel);
 				String tmp="";
 				for(String str:viewstring)
 					tmp+=str+'\n';
@@ -100,7 +103,7 @@ public class OilWindow extends JFrame {
 		
 		JScrollPane itemscroll = new JScrollPane();
 		GridBagConstraints gbc_itemscroll = new GridBagConstraints();
-		gbc_itemscroll.gridheight = 4;
+		gbc_itemscroll.gridheight = 5;
 		gbc_itemscroll.insets = new Insets(0, 0, 0, 5);
 		gbc_itemscroll.fill = GridBagConstraints.BOTH;
 		gbc_itemscroll.gridx = 1;
@@ -116,7 +119,7 @@ public class OilWindow extends JFrame {
 		
 
 		GridBagConstraints gbc_itemview = new GridBagConstraints();
-		gbc_itemview.gridheight = 4;
+		gbc_itemview.gridheight = 5;
 		gbc_itemview.insets = new Insets(0, 0, 0, 5);
 		gbc_itemview.fill = GridBagConstraints.BOTH;
 		gbc_itemview.gridx = 0;
@@ -142,15 +145,46 @@ public class OilWindow extends JFrame {
 		refresh.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Refreshlist(itemmodel);
+				textField.setText("");
+				itemview.setText("");
 			}
 		});
+		
+		JButton checkoutbtn = new JButton("Check out");
+		checkoutbtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(OwO == null)
+					return;
+				String[] codata=itemview.getText().split("\n");
+				double num,price,total;
+				String[] data;
+				total = 0;
+				for(String in:codata) {
+					data=in.split(":");
+					num = Double.parseDouble(data[1]);
+					price = Double.parseDouble(data[2]);
+					OwO.ma.findItem(data[0]).removeitem(num);
+					total+= num * price; 
+				}
+				JOptionPane.showMessageDialog(null,"結帳成功，總共"+total+"元");
+				Refreshlist(itemmodel);
+				itemview.setText("");
+			}
+		});
+		GridBagConstraints gbc_checkoutbtn = new GridBagConstraints();
+		gbc_checkoutbtn.insets = new Insets(0, 0, 5, 0);
+		gbc_checkoutbtn.gridx = 2;
+		gbc_checkoutbtn.gridy = 3;
+		contentPane.add(checkoutbtn, gbc_checkoutbtn);
 		GridBagConstraints gbc_refresh = new GridBagConstraints();
 		gbc_refresh.gridx = 2;
-		gbc_refresh.gridy = 3;
+		gbc_refresh.gridy = 4;
 		contentPane.add(refresh, gbc_refresh);
 	}
 	
 	public void Refreshlist(DefaultListModel itemmodel) {
+		if(OwO == null)
+			return;
 		itemmodel.clear();
 		for(String it:OwO.ma.getAllstock()) {
 			itemmodel.addElement(it);

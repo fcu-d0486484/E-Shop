@@ -5,9 +5,10 @@ class OilManager extends Manager{
 	@Override
 	Item createItem() {
 		return new Item() {
-			void initNewitem(String name,double initnum) {
+			void initNewitem(String name,double initnum,double price) {
 				this.name=name;
 				this.stocknum=initnum;
+				this.price=price;
 			}
 			void pushstock(double addnum) {
 				System.out.println("品名:"+this.name+"增加從"+this.stocknum+">>>"+(this.stocknum+addnum));
@@ -22,7 +23,7 @@ class OilManager extends Manager{
 				}
 			}
 			String getitemstock() {
-				return this.name+":"+this.stocknum;
+				return this.name+":"+this.stocknum+":"+this.price;
 			}
 		};
 	}

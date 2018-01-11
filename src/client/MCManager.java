@@ -21,7 +21,7 @@ public class MCManager extends Manager{
 	@Override
 	Item createItem() {
 		return new Item() {
-			void initNewitem(String name,double initnum) {
+			void initNewitem(String name,double initnum,double price) {
 				this.name=name;
 				this.stocknum=initnum;
 			}
