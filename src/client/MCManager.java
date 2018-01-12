@@ -1,29 +1,15 @@
 package client;
 
-public class MCManager extends Manager{
-
-	@Override
-	Item findItem(String name) {
-		Item respond=null;
-		String tmp=name.toLowerCase();
-		for(Item it:stock) {
-			if(tmp.equals(it.name.toLowerCase())) {
-				respond=it;
-				break;
-			}
-		}
-		if(respond==null) {
-			System.out.println("無法找到你需要的食物");
-		}
-		return respond;
-	}
+class MCManager extends Manager{
 
 	@Override
 	Item createItem() {
 		return new Item() {
+			
 			void initNewitem(String name,double initnum,double price) {
 				this.name=name;
 				this.stocknum=initnum;
+				this.price=price;
 			}
 			void pushstock(double addnum) {
 				System.out.println("品名:"+this.name+"增加從"+this.stocknum+">>>"+(this.stocknum+addnum));
@@ -38,8 +24,23 @@ public class MCManager extends Manager{
 				}
 			}
 			String getitemstock() {
-				return this.name+":"+this.stocknum;
+				return this.name+":"+this.stocknum+":"+this.price;
 			}
 		};
+	}
+	@Override
+	Item findItem(String name) {
+		Item respond=null;
+		String tmp=name.toLowerCase();
+		for(Item it:stock) {
+			if(tmp.equals(it.name.toLowerCase())) {
+				respond=it;
+				break;
+			}
+		}
+		if(respond==null) {
+			System.out.println("無法找到你需要的油品");
+		}
+		return respond;
 	}
 }
